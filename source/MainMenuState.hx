@@ -16,7 +16,9 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+#if newgrounds
 import io.newgrounds.NG;
+#end
 import lime.app.Application;
 
 #if windows
@@ -168,7 +170,11 @@ class MainMenuState extends MusicBeatState
 		staticAnimeshoun.animation.play('idle');
 		staticAnimeshoun.y = 1000;
 		add(staticAnimeshoun);
-
+                
+		#if mobileC
+		addVirtualPad(UP_DOWN, A_B);
+		#end
+			
 		changeItem();
 
 		if (TitleState.isGitHubNew != '0.0.3\n' && FlxG.save.data.gitWarning == true)
@@ -218,13 +224,13 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 
-			if (FlxG.keys.justPressed.UP)
+			if (controls.UP_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeItem(-1);
 			}
 
-			if (FlxG.keys.justPressed.DOWN)
+			if (controls.DOWN_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeItem(1);
