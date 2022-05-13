@@ -2,6 +2,9 @@ package;
 
 import Conductor.BPMChangeEvent;
 import flixel.FlxG;
+#if mobileC
+import ui.FlxVirtualPad;
+#end
 import flixel.FlxSubState;
 
 class MusicBeatSubstate extends FlxSubState
