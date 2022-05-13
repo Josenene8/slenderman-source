@@ -58,6 +58,10 @@ class GameOverSubstate extends MusicBeatSubstate
 		FlxG.camera.target = null;
 
 		bf.playAnim('firstDeath');
+		
+		#if mobileC
+		addVirtualPad(NONE, A_B);
+		#end
 	}
 
 	var startVibin:Bool = false;
