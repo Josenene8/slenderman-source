@@ -86,11 +86,12 @@ class OptionsMenu extends MusicBeatState
 			new ResetScoreOption("Reset your score on all songs and weeks. This is irreversible!"),
 			new LockWeeksOption("Reset your story mode progress. This is irreversible!"),
 			new ResetSettings("Reset ALL your settings. This is irreversible!")
-		]),
+			
+		]), #if mobileC
 		
 		new OptionCategory("Mobile settings", [
 			new CustomControls("edit a control"),
-		])
+		])#end
 	];
 
 	public var acceptInput:Bool = true;
