@@ -3767,9 +3767,11 @@ class PlayState extends MusicBeatState
 					#end
 
 					if (SONG.validScore)
-					{
+					{  
+						#if newgrounds
 						NGio.unlockMedal(60961);
 						Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
+					        #end
 					}
 
 					StoryMenuState.unlockNextWeek(storyWeek);
@@ -4448,7 +4450,7 @@ class PlayState extends MusicBeatState
 
 	public function backgroundVideo(source:String) // for background videos
 	{
-		#if cpp
+		/*#if cpp
 		useVideo = true;
 
 		FlxG.stage.window.onFocusOut.add(focusOut);
@@ -4485,12 +4487,12 @@ class PlayState extends MusicBeatState
 
 		videoSprite = new FlxSprite(-470, -30).loadGraphic(data);
 
-		videoSprite.setGraphicSize(Std.int(videoSprite.width * 1.2));
+		videoSprite.setGraphicSize(Std.int(videoSprite.width * 1.2));*/
 
 		remove(gf);
 		remove(boyfriend);
 		remove(dad);
-		add(videoSprite);
+	//	add(videoSprite);
 		if (dad.curCharacter == 'slenderman')
 			{
 				gf.playAnim('scared');
@@ -4505,13 +4507,13 @@ class PlayState extends MusicBeatState
 		
 		add(dad);
 
-		trace('poggers');
+		/*trace('poggers');
 
 		if (!songStarted)
 			webmHandler.pause();
 		else
 			webmHandler.resume();
-		#end
+		#end*/
 	}
 
 	function noteMiss(direction:Int = 1, daNote:Note):Void
