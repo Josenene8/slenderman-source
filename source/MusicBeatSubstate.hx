@@ -2,10 +2,11 @@ package;
 
 import Conductor.BPMChangeEvent;
 import flixel.FlxG;
+import flixel.FlxSubState;
 #if mobileC
 import ui.FlxVirtualPad;
 #end
-import flixel.FlxSubState;
+import flixel.input.actions.FlxActionInput;
 
 class MusicBeatSubstate extends FlxSubState
 {
@@ -23,8 +24,8 @@ class MusicBeatSubstate extends FlxSubState
 
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
-	
-        #if mobileC
+
+	#if mobileC
 	var _virtualpad:FlxVirtualPad;
 
 	var trackedinputs:Array<FlxActionInput> = [];
@@ -51,42 +52,23 @@ class MusicBeatSubstate extends FlxSubState
 	#else
 	public function addVirtualPad(?DPad, ?Action){};
 	#end	
-		
+
 	override function update(elapsed:Float)
 	{
 		//everyStep();
-		var nextStep = updateCurStep();
+		var oldStep:Int = curStep;
 
-		if (nextStep >= 0)
-		{
-			if (nextStep > curStep)
-			{
-				for (i in curStep...nextStep)
-				{
-					curStep++;
-					updateBeat();
-					stepHit();
-				}
-			}
-			else if (nextStep < curStep)
-			{
-				//Song reset?
-				curStep = nextStep;
-				updateBeat();
-				stepHit();
-			}
-		}
+		updateCurStep();
+		curBeat = Math.floor(curStep / 4);
+
+		if (oldStep != curStep && curStep > 0)
+			stepHit();
+
 
 		super.update(elapsed);
 	}
 
-	private function updateBeat():Void
-	{
-		lastBeat = curBeat;
-		curBeat = Math.floor(curStep / 4);
-	}
-
-	private function updateCurStep():Int
+	private function updateCurStep():Void
 	{
 		var lastChange:BPMChangeEvent = {
 			stepTime: 0,
@@ -99,7 +81,7 @@ class MusicBeatSubstate extends FlxSubState
 				lastChange = Conductor.bpmChangeMap[i];
 		}
 
-		return lastChange.stepTime + Math.floor((Conductor.songPosition - lastChange.songTime) / Conductor.stepCrochet);
+		curStep = lastChange.stepTime + Math.floor((Conductor.songPosition - lastChange.songTime) / Conductor.stepCrochet);
 	}
 
 	public function stepHit():Void
