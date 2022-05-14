@@ -91,9 +91,7 @@ class OptionsMenu extends MusicBeatState
 				case "downscroll: on" | "downscroll: off":
 					config.setdownscroll();
 					FlxG.resetState();
-				
-				case "About":
-					FlxG.switchState(new options.AboutState());
+			
 				case "test cutscene":
 					//webview.openHTML(Assets.getBytes('assets/index.html'));
 					//webview.openURLfromAssets('index.html');
