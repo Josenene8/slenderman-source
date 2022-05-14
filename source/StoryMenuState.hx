@@ -298,7 +298,7 @@ class StoryMenuState extends MusicBeatState
 					}
 				}
 
-				if (controls.UP_P
+				if (controls.UP_P)
 				{
 					changeWeek(-1);
 				}
